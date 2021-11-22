@@ -1014,11 +1014,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\MostafaAli\\source\\repos\\Cars\\Cars\\Cars.csproj",
+      "projectUniqueName": "C:\\Users\\MostafaAli\\Documents\\GitHub\\Cars\\Cars\\Cars.csproj",
       "projectName": "Cars",
-      "projectPath": "C:\\Users\\MostafaAli\\source\\repos\\Cars\\Cars\\Cars.csproj",
+      "projectPath": "C:\\Users\\MostafaAli\\Documents\\GitHub\\Cars\\Cars\\Cars.csproj",
       "packagesPath": "C:\\Users\\MostafaAli\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\MostafaAli\\source\\repos\\Cars\\Cars\\obj\\",
+      "outputPath": "C:\\Users\\MostafaAli\\Documents\\GitHub\\Cars\\Cars\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\MostafaAli\\AppData\\Roaming\\NuGet\\NuGet.Config",
