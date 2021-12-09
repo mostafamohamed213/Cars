@@ -5,6 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Controllers\AccountController.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="5.0.12" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.12">
       <PrivateAssets>all</PrivateAssets>
@@ -15,6 +19,46 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="5.0.10" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\Template\assets\images\logo.svg" />
+    <None Include="wwwroot\Template\assets\images\qrcode.svg" />
+    <None Include="wwwroot\Template\fonts\feather.svg" />
+    <None Include="wwwroot\Template\js\apexcharts.custom.js" />
+    <None Include="wwwroot\Template\js\apexcharts.min.js" />
+    <None Include="wwwroot\Template\js\apps.js" />
+    <None Include="wwwroot\Template\js\bootstrap-datepicker.min.js" />
+    <None Include="wwwroot\Template\js\bootstrap.min.js" />
+    <None Include="wwwroot\Template\js\Chart.min.js" />
+    <None Include="wwwroot\Template\js\config.js" />
+    <None Include="wwwroot\Template\js\d3.min.js" />
+    <None Include="wwwroot\Template\js\datamaps-zoomto.js" />
+    <None Include="wwwroot\Template\js\datamaps.all.min.js" />
+    <None Include="wwwroot\Template\js\datamaps.custom.js" />
+    <None Include="wwwroot\Template\js\dataTables.bootstrap4.min.js" />
+    <None Include="wwwroot\Template\js\daterangepicker.js" />
+    <None Include="wwwroot\Template\js\dropzone.min.js" />
+    <None Include="wwwroot\Template\js\fullcalendar.custom.js" />
+    <None Include="wwwroot\Template\js\fullcalendar.js" />
+    <None Include="wwwroot\Template\js\gauge.min.js" />
+    <None Include="wwwroot\Template\js\jquery.dataTables.min.js" />
+    <None Include="wwwroot\Template\js\jquery.mask.min.js" />
+    <None Include="wwwroot\Template\js\jquery.min.js" />
+    <None Include="wwwroot\Template\js\jquery.sparkline.min.js" />
+    <None Include="wwwroot\Template\js\jquery.steps.min.js" />
+    <None Include="wwwroot\Template\js\jquery.stickOnScroll.js" />
+    <None Include="wwwroot\Template\js\jquery.timepicker.js" />
+    <None Include="wwwroot\Template\js\jquery.validate.min.js" />
+    <None Include="wwwroot\Template\js\moment.min.js" />
+    <None Include="wwwroot\Template\js\perfect-scrollbar.min.js" />
+    <None Include="wwwroot\Template\js\popper.min.js" />
+    <None Include="wwwroot\Template\js\quill.min.js" />
+    <None Include="wwwroot\Template\js\select2.min.js" />
+    <None Include="wwwroot\Template\js\simplebar.min.js" />
+    <None Include="wwwroot\Template\js\tinycolor-min.js" />
+    <None Include="wwwroot\Template\js\topojson.min.js" />
+    <None Include="wwwroot\Template\js\uppy.min.js" />
   </ItemGroup>
 
 </Project>
