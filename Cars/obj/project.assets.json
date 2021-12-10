@@ -1009,19 +1009,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\MostafaAli\\.nuget\\packages\\": {}
+    "C:\\Users\\HUAWEI\\.nuget\\packages\\": {},
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\MostafaAli\\Documents\\GitHub\\Cars\\Cars\\Cars.csproj",
+      "projectUniqueName": "C:\\Users\\HUAWEI\\Documents\\GitHub\\Cars\\Cars\\Cars.csproj",
       "projectName": "Cars",
-      "projectPath": "C:\\Users\\MostafaAli\\Documents\\GitHub\\Cars\\Cars\\Cars.csproj",
-      "packagesPath": "C:\\Users\\MostafaAli\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\MostafaAli\\Documents\\GitHub\\Cars\\Cars\\obj\\",
+      "projectPath": "C:\\Users\\HUAWEI\\Documents\\GitHub\\Cars\\Cars\\Cars.csproj",
+      "packagesPath": "C:\\Users\\HUAWEI\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\HUAWEI\\Documents\\GitHub\\Cars\\Cars\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+      ],
       "configFilePaths": [
-        "C:\\Users\\MostafaAli\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\HUAWEI\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -1086,7 +1090,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.403\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.400\\RuntimeIdentifierGraph.json"
       }
     }
   }
