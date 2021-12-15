@@ -1,0 +1,105 @@
+﻿@model PermissionsFormViewModel
+
+@{
+    ViewData["Title"] = "Manage Permissions";
+}
+<link href="~/css/settingsstile.css" rel="stylesheet" />
+<form asp-action="ManagePermissions" method="post">
+    <div class="card">
+        <div class="card-header">
+            <h4>@Model.RoleName</h4>
+            Add/Remove Permissions
+        </div>
+        <div class="card-body">
+            <input type="hidden" asp-for="RoleId" />
+            <div class="table-wrapper-scroll-y my-custom-scrollbar">
+                <table class="table table-bordered table-striped mb-0">
+                    <thead>
+                        <tr>
+                            <th class="p-2"><input type="checkbox"  id="select-all" /> Select All</th>
+                            <th>Module</th>
+                            <th>Permission</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @for (int i = 0; i < Model.RoleCalims.Count; i++)
+                        {
+                            <tr>
+                                <td>
+                                    <div class="form-check m-1">
+                                        <input type="hidden" asp-for="@Model.RoleCalims[i].DisplayValue" />
+                                   
+                                            <input asp-for="@Model.RoleCalims[i].IsSelected" id="@Model.RoleCalims[i].DisplayValue.Split('.')[1]@Model.RoleCalims[i].DisplayValue.Split('.')[2]" onclick="checkfun('@Model.RoleCalims[i].DisplayValue.Split('.')[1]','@Model.RoleCalims[i].DisplayValue.Split('.')[2]')"  class="form-check-input" />
+                                   
+                                     
+                                        @*<label class="form-check-label" asp-for="@Model.Roles[i].IsSelected">
+            @Model.Roles[i].DisplayValue
+        </label>*@
+                                    </div>
+                                </td>
+                                <td>@Model.RoleCalims[i].DisplayValue.Split('.')[1]</td>
+                                <td>@Model.RoleCalims[i].DisplayValue.Split('.')[2]</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <div asp-validation-summary="All" class="text-danger"></div>
+        </div>
+        <div class="card-footer">
+            <button type="submit" class="btn btn-primary">Save</button>
+            <a asp-action="ListRoles" class="btn btn-secondary">Cancel</a>
+        </div>
+    </div>
+</form>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+
+$('#select-all').click(function(event) {
+    if(this.checked) {
+        // Iterate each checkbox
+        $(':checkbox').each(function() {
+            this.checked = true;
+        });
+    } else {
+        $(':checkbox').each(function() {
+            this.checked = false;
+        });
+    }
+});
+        function checkfun(module, per)
+        {
+            if (document.getElementById(module + per).checked == true) {
+                if (per == "Create" || per == "Edit" || per == "Active_DeActive" || per == "ManagePermissions") {
+                    document.getElementById(module + "View").checked = true;
+                }
+            }
+            else {
+                if (per == "View" && module != "Roles" && module != "Users" && module != "Map") {
+
+                    document.getElementById(module + "Create").checked = false;
+                    document.getElementById(module + "Edit").checked = false;
+                    document.getElementById(module + "Active_DeActive").checked = false;
+
+                }
+                else if (per == "View" && module == "Roles")
+                {
+                    document.getElementById(module + "Create").checked = false;
+                    document.getElementById(module + "Edit").checked = false;
+                    document.getElementById(module + "ManagePermissions").checked = false;
+                   
+                }
+                else if (per == "View" && module == "Users") {
+                    document.getElementById(module + "Create").checked = false;
+                    document.getElementById(module + "Edit").checked = false;
+                }
+                else if (per == "View" && module == "Map") {
+                    document.getElementById(module + "Active_DeActive").checked = false;
+                }
+
+            }
+        }
+    </script>
+}

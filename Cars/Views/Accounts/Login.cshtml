@@ -1,0 +1,207 @@
+﻿@model LoginViewModel
+
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Gm System Login</title>
+    <meta charset="utf-8">
+    <link rel="icon" href="~/Images/logoc.png" type="image/png" sizes="16x16">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/css/all.min.css">
+
+    <style>
+        body {
+            font-family: 'Raleway', sans-serif;
+        }
+
+        .loginimage {
+            margin-top: 100px;
+        }
+
+        .login {
+            background-color: #f2f2f2;
+            height: 750px;
+        }
+
+        .site-logo-title {
+            color: #1e3767;
+            font-size: 12px;
+            margin: 0;
+            margin-top: -10px;
+            font-family: IBM-semibold;
+            font-weight: bold;
+        }
+
+        .logoimg {
+            margin-top: 20px;
+            width: 125px;
+            height: 55px;
+            vertical-align: middle;
+            border-style: none;
+        }
+
+        .login-content {
+            max-width: 340px;
+            margin: auto;
+            position: relative;
+            height: 80px;
+            margin-top: 70px;
+            margin-bottom: 40px;
+        }
+
+
+        .btn-grad {
+            background-image: linear-gradient(to right, #4b6cb7 0%, #182848 51%, #4b6cb7 100%)
+        }
+
+        .btn-grad {
+            margin: 10px;
+            padding: 15px 45px;
+            text-align: center;
+            text-transform: uppercase;
+            transition: 0.5s;
+            background-size: 200% auto;
+            color: white;
+            box-shadow: 0 0 20px #eee;
+            border-radius: 10px;
+            display: block;
+        }
+
+            .btn-grad:hover {
+                background-position: right center; /* change the direction of the change here */
+                color: #fff;
+                text-decoration: none;
+            }
+    </style>
+    <script>
+        function myFunction() {
+            var x = document.getElementById("txtPassword");
+            if (x.type === "password") {
+                x.type = "text";
+            } else {
+                x.type = "password";
+            }
+        }
+    </script>
+</head>
+<body>
+
+    <div class="container-fluid">
+        <div class="row ">
+            @*<div class="col-md-6 login ">
+
+                <img src="~/Images/cemex-logo.png" class="img-fluid logoimg" alt="logo" />
+                <p class="site-logo-title">WPM System</p>
+                <div style="text-align:center; border-radius:20%;">
+                    <img src="~/Images/wp.jpg" class="img-fluid" style="margin-top:20px; border-radius:20%;
+   box-shadow: 1px 1px 1px 1px rgba(153, 76, 0, 1), 1px 1px 1px 1px rgba(153, 76, 0, 1);" />
+                </div>
+            </div>*@
+
+            <div class="col-md-6 ">
+                <div class="login-content">
+
+                    <h2 style="color: #eb0438; font-size: 30px; letter-spacing: 2px; font-weight:bold">Welcome to General Motors System</h2>
+
+                </div>
+
+                <div class="card">
+                    <article class="card-body">
+
+                        <h4 class="card-title text-center mb-4 mt-1">Login</h4>
+                        <hr>
+
+
+                        <form method="post">
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+                                    </div>
+                                    <input asp-for="UserName" class="form-control" placeholder="User Name">
+
+
+                                </div> <!-- input-group.// -->
+                                <span asp-validation-for="UserName" class="text-danger"></span>
+                            </div> <!-- form-group// -->
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
+                                    </div>
+
+                                    <input type="password" asp-for="Password" placeholder="******" class="form-control" id="txtPassword" />
+                                    <br />
+
+                                </div> <!-- input-group.// -->
+                                <span asp-validation-for="Password" class="text-danger"></span>
+                            </div> <!-- form-group// -->
+                            <div class="">
+                                <input type="checkbox" onclick="myFunction()"> <span>Show Password</span>
+                            </div>
+                            <div class="form-group">
+                                <div class="checkbox">
+                                    <label asp-for="RememberMe">
+                                        <input asp-for="RememberMe" />
+                                        @Html.DisplayNameFor(m => m.RememberMe)
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn-grad btn-block"> Login  </button>
+                            </div> <!-- form-group// -->
+                        </form>
+                    </article>
+                    <div style="text-align:center">
+                        <div asp-validation-summary="ModelOnly" class="text-danger">
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+</body>
+</html>
+
+
+
+@*<div class="row">
+        <div class="col-md-12">
+            <form method="post">
+                <div asp-validation-summary="All" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="UserName"></label>
+                    <input asp-for="UserName" class="form-control" />
+                    <span asp-validation-for="UserName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Password"></label>
+                    <input asp-for="Password" class="form-control" />
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <div class="checkbox">
+                        <label asp-for="RememberMe">
+                            <input asp-for="RememberMe" />
+                            @Html.DisplayNameFor(m => m.RememberMe)
+                        </label>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Login</button>
+            </form>
+        </div>
+    </div>*@

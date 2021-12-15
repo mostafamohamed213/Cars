@@ -1,0 +1,47 @@
+﻿@model EditUserByuserViewModel
+
+@{
+    ViewBag.Title = "Edit User";
+}
+
+<h3 class="ml-3">Edit User</h3>
+
+<form method="post" class="mt-3">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="row mr-0 ml-3">
+
+        <div class="form-group" style="display:none">
+            <label asp-for="userId" class="col-sm-2 col-form-label"></label>
+            <div class="col-sm-10">
+                <input asp-for="userId"  class="form-control">
+            </div>
+        </div>
+  
+    
+
+        <div class="form-group col-sm-4 mr-3">
+            <label asp-for="NewPassword"></label>
+            <input asp-for="NewPassword" class="form-control" />
+            <span asp-validation-for="NewPassword" class="text-danger"></span>
+        </div>
+        <div class="form-group col-sm-4">
+            <label asp-for="ConfirmPassword"></label>
+            <input asp-for="ConfirmPassword" class="form-control" />
+            <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+        </div>
+
+    
+
+
+
+
+
+        <div class="form-group col-sm-12">
+            <div class="col-sm-10">
+                <button type="submit" class="btn btn-primary">Update</button>
+            </div>
+        </div>
+
+
+    </div>
+</form>
