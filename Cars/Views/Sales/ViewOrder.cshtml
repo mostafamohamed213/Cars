@@ -1,0 +1,307 @@
+﻿
+@model Cars.Models.Order
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer localizer
+@{
+    ViewData["Title"] = "View Order";
+
+    int counter = 1;
+
+}
+
+
+<div class="col-12 mb-4">
+    <div class="card shadow">
+        <div class="card-header">
+            <strong class="card-title h4">@localizer["OrderHeaderDetails"]</strong>
+        </div>
+        <div class="card-body">
+            <div class="row h5">
+                <div class="col-md-3">
+                    @localizer["Chases"] : @Model.Vehicle.Chases
+                </div>
+                <div class="col-md-3 border-left border-right">
+                    @localizer["CarName"] : @Model.Vehicle.Name
+                </div>
+                <div class="col-md-3 border-left border-right">
+                    @localizer["Phone"] : @Model.Customer.CustomerContacts.FirstOrDefault().Phone
+                </div>
+                <div class="col-md-3">
+                    @localizer["Maintenance"] : @if (Model.WithMaintenance.HasValue && Model.WithMaintenance.Value)
+                    {
+                    <span class="fe fe-24 fe-check"></span>
+                    }
+                    else
+                    {
+                    <span class="fe fe-24 fe-x"></span>
+                    }
+                </div>
+
+            </div>
+            <div class="row h5">
+
+                @if (!string.IsNullOrEmpty(@Model.Vehicle.Brand))
+                {
+                    <div class="col-md-3">
+                        @localizer["Brand"] : @Model.Vehicle.Brand
+                    </div>
+                }
+                @if (!string.IsNullOrEmpty(@Model.Vehicle.Model))
+                {
+                    <div class="col-md-3 border-left border-right">
+                        @localizer["Model"] : @Model.Vehicle.Model
+                    </div>
+                }
+                @if (!string.IsNullOrEmpty(@Model.Vehicle.Year))
+                {
+                    <div class="col-md-3">
+                        @localizer["Year"] : @Model.Vehicle.Year
+                    </div>
+                }
+
+
+            </div>
+            <div class="row h5">
+                <div class="col-md-4">
+                    @*<button class="btn btn-success" id="btnAddOrderLine"> @localizer["AddOrderLine"]</button>*@
+                    @*<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalAddOrderLine">
+                        @localizer["AddOrderLine"]
+                    </button>*@
+                </div>
+                <div class="col-md-4">
+                </div>
+                <div class="col-md-4">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*<div class="col-12 mb-4">
+    <div class="card shadow">
+        <div class="card-header">
+            <strong class="card-title">@localizer["Orderlines"]</strong>
+        </div>
+        <div class="card-body">
+
+        </div>
+    </div>
+</div>*@
+
+<div class="card shadow">
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-2" style=" margin-top: 4px; ">
+                <h5 class="card-title">
+                    @localizer["Orderlines"]
+                </h5>
+            </div>
+            <div class="col-md-8"></div>
+            <div class="col-md-2" style="margin-top: -10px;">
+                @if (Model.Enabled.HasValue && Model.Enabled.Value)
+                {
+
+                }
+                else
+                {
+                    <small class="badge badge-pill text-white ">
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalAddOrderLine">
+                            @localizer["AddOrderLine"]
+                        </button>
+                    </small>
+                }
+
+            </div>
+        </div>
+        
+       
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>@localizer["ID"]</th>
+                    <th>@localizer["Items"]</th>
+                    <th>@localizer["Quantity"]</th>
+                    <th>@localizer["Type"]</th>
+                    <th>@localizer["Approved"]</th>
+                    @*<th></th>
+                    <th></th>*@
+                </tr>
+            </thead>
+            <tbody id="datatbodyid">
+                @foreach (var item in Model.OrderDetails)
+                {
+                    <tr>
+                        <td>@counter</td>
+                        <td>@item.OrderDetailsID</td>
+                        <td>@item.Items</td>
+                        <td>@item.Quantity</td>
+                        <td>@item.OrderDetailsType.NameEn</td>
+                        <td>
+                            @if (item.IsApproved.HasValue)
+                            {
+                                if (item.IsApproved.Value)
+                                {
+                                    <span class="fe fe-24 fe-check"></span>
+                                }
+                                else
+                                {
+                                    <span class="fe fe-24 fe-x"></span>
+                                }
+                            }
+                        </td>
+                        @*<td>
+                            <a href="#" title="@localizer["Edit"]"> <span class="small text-muted"><span class="fe fe-24 fe-edit"></span></span></a>
+                        </td>
+                        <td>
+                            <a href="#" title="@localizer["Delete"]"> <span class="small text-muted"><span class="fe fe-24 fe-x"></span></span></a>
+                        </td>*@
+
+                    </tr>
+                    counter++;
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+<br />
+<div class="row">
+    <div class="col-md-9"></div>
+    <div class="col-md-3">
+        @if (Model.Enabled.HasValue && Model.Enabled.Value)
+        {
+            <a style="width : 100px" asp-action="GetOrders" asp-controller="Sales"  class="btn btn-primary">@localizer["Back"] </a>
+
+        }
+        else
+        {
+            <a asp-action="SaveAsDraft" asp-controller="Sales" asp-route-OrderId="@Model.OrderID" class="btn btn-light">@localizer["SaveAsDraft"]</a>
+            <a style="width : 100px" asp-action="SaveOrder" asp-controller="Sales" asp-route-OrderId="@Model.OrderID" class="btn btn-success">@localizer["Save"] </a>
+
+        }
+
+    </div>
+</div>
+
+<!-- Button trigger modal -->
+
+<input asp-for="OrderID" style="display:none" />
+<!-- Modal -->
+<div class="modal fade" id="ModalAddOrderLine" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="alert alert-error" id="alertErrorCodeType" style=" background-color: indianred; display:none">
+                <strong>@localizer["Error"]!</strong> <span id="spnErrorCodeType" style="color: #001a4e"> </span>
+            </div>
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">@localizer["AddOrderLine"]</h5>
+
+                <button type="button" class="close" onclick="clearModalAddOrderLine()" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <label for="example-readonly">@localizer["Items"]</label>
+                <input type="text" name="OrderDetailsItems" id="OrderDetailsItems" class="form-control" />
+                <label for="example-readonly">@localizer["Quantity"]</label>
+                <input type="number" name="OrderDetailsQuantity" id="OrderDetailsQuantity" class="form-control" />
+                <label for="example-readonly">@localizer["Type"]</label>
+                <select id="OrderDetailsType" name="OrderDetailsType" asp-items="@ViewBag.types" class="form-control"></select>
+                @*<br />*@
+                <!--<label for="example-readonly">@localizer["Approved"] : <input type="checkbox"--> @*style="width: 4%;"*@ <!--name="OrderDetailsApproved" id="OrderDetailsApproved" /></label>-->
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" onclick="clearModalAddOrderLine()" id="btnCloseOrderDetails" data-dismiss="modal">@localizer["Close"]</button>
+                <button type="button" class="btn btn-primary" id="btnSaveOrderDetails">@localizer["Save"]</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        ChangeColorSidebarItem("anavbarOrders", "aAddOrderHeader");
+        $("#btnSaveOrderDetails").click(function () {
+            $.ajax({
+                type: "Post",
+                url: "/Sales/AddOrderDetails",
+                data: { "orderId": OrderID.value, "Items": OrderDetailsItems.value, "Quantity": OrderDetailsQuantity.value, "Type": OrderDetailsType.value, "Approved": OrderDetailsApproved.checked  },
+                success: function (response) {
+                    console.log(response);
+                    document.getElementById("btnCloseOrderDetails").disabled = true;
+                    document.getElementById("btnSaveOrderDetails").disabled = true;
+                    if (response.status == 1) {                       
+                        document.getElementById("alertErrorCodeType").style.display = "none";
+                        document.getElementById("spnErrorCodeType").innerHTML = "";
+                        let counter = 1;
+                        if ((response.object != null || response.object != "null")  && response.object.length > 0) {
+                            document.getElementById('datatbodyid').innerHTML ="";
+                             response.object.forEach((value, i) => {
+                            var row_1 = document.createElement('tr');
+                                 var row_data_0 = document.createElement('td');
+                                 row_data_0.innerHTML = counter;
+                                 var row_data_1 = document.createElement('td');
+                                 row_data_1.innerHTML = value.orderDetailsID;
+                                 var row_data_2 = document.createElement('td');
+                            row_data_2.innerHTML = value.items;
+                                 var row_data_3 = document.createElement('td');
+                            row_data_3.innerHTML = value.quantity;
+                                 var row_data_4 = document.createElement('td');
+                                 row_data_4.innerHTML = value.type;
+                                 var row_data_5 = document.createElement('td');
+                            if ( value.IsApproved == 'null') {
+                                row_data_5.innerHTML = "";
+                            } else {
+                                if (value.isApproved == true ) {
+                                    row_data_5.innerHTML = '<span class="fe fe-24 fe-check"></span>';
+                                } else {
+                                    row_data_5.innerHTML=  '<span class="fe fe-24 fe-x"></span>'
+                                }                              
+                            }
+                                 @*var row_data_6 = document.createElement('td');
+                                 row_data_6.innerHTML = '<a href="#" title="@localizer["Edit"]"> <span class="small text-muted"><span class="fe fe-24 fe-edit"></span></span></a>';
+                                 var row_data_7 = document.createElement('td');
+                                   row_data_7.innerHTML = '<a href="#" title="@localizer["Delete"]"> <span class="small text-muted"><span class="fe fe-24 fe-x"></span></span></a>';*@
+                                 row_1.append(row_data_0);
+                                 row_1.append(row_data_1);
+                                 row_1.append(row_data_2);
+                                 row_1.append(row_data_3);
+                                 row_1.append(row_data_4);
+                                 row_1.append(row_data_5);
+                              //   row_1.append(row_data_6);
+                             //    row_1.append(row_data_7);
+                                 document.getElementById('datatbodyid').append(row_1);
+                            counter++;
+                             });
+                     
+                        }
+                        clearModalAddOrderLine();
+                        document.getElementById("btnCloseOrderDetails").disabled = false;
+                        document.getElementById("btnSaveOrderDetails").disabled = false;
+                        document.getElementById("btnCloseOrderDetails").click();
+
+                    } else if (response.status == -1) {
+                        document.getElementById("btnCloseOrderDetails").disabled = false;
+                        document.getElementById("btnSaveOrderDetails").disabled = false;
+                        document.getElementById("spnErrorCodeType").innerHTML = response.object;
+                        document.getElementById("alertErrorCodeType").style.display = "block";
+                    }
+                },
+                failure: function (response) {
+                    console.log(response);
+                },
+                error: function (response) {
+                    console.log(response);
+                }
+            });
+        });
+        function clearModalAddOrderLine() {
+            OrderDetailsItems.value = '';
+            OrderDetailsQuantity.value = '';
+            document.getElementById("OrderDetailsApproved").checked = false;
+        }
+    </script>
+
+}

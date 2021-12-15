@@ -1,4 +1,5 @@
 using Cars.Models;
+using Cars.Service;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -39,9 +40,9 @@ namespace Cars
             {
                 var supportedCultures = new[]
                 {
-                    new CultureInfo("en-US"),
-                    new CultureInfo("ar-EG")
-                   
+                   new CultureInfo("en-US"),
+                   new CultureInfo("ar_EG"),
+
                 };
 
                 options.DefaultRequestCulture = new RequestCulture(culture: "en-US", uiCulture: "en-US");
@@ -58,6 +59,7 @@ namespace Cars
             })
               .AddEntityFrameworkStores<CarsContext>()
                .AddDefaultTokenProviders();
+            services.AddTransient<OrderServices, OrderServices>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

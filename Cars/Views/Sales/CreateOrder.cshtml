@@ -1,50 +1,152 @@
 ﻿
+@model Cars.ViewModels.OrderViewModel
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer localizer
 @{
     ViewData["Title"] = "Create Order";
+
 }
 <div class="card shadow mb-4">
     <div class="card-header">
-        <strong class="card-title">Form controls</strong>
+        <strong class="card-title">@localizer["AddOrderHeader"]</strong>
     </div>
     <div class="card-body">
-        <div class="row">
-            <div class="col-md-6">
-                <div class="form-group mb-3">
-                    <label for="simpleinput">Text</label>
-                    <input type="text" id="simpleinput" class="form-control">
-                </div>
-                <div class="form-group mb-3">
-                    <label for="example-email">Email</label>
-                    <input type="email" id="example-email" name="example-email" class="form-control" placeholder="Email">
-                </div>
-                <div class="form-group mb-3">
-                    <label for="example-password">Password</label>
-                    <input type="password" id="example-password" class="form-control" value="password">
-                </div>
-                <div class="form-group mb-3">
-                    <label for="example-palaceholder">Placeholder</label>
-                    <input type="text" id="example-palaceholder" class="form-control" placeholder="placeholder">
-                </div>
-            </div> <!-- /.col -->
-            <div class="col-md-6">
-                <div class="form-group mb-3">
-                    <label for="example-helping">Helping text</label>
-                    <input type="text" id="example-helping" class="form-control" placeholder="Input with helping text">
-                    <span class="help-block"><small>A block of help text that breaks onto a new line.</small></span>
-                </div>
-                <div class="form-group mb-3">
-                    <label for="example-readonly">Readonly</label>
-                    <input type="text" id="example-readonly" class="form-control" readonly="" value="Readonly value">
-                </div>
-                <div class="form-group mb-3">
-                    <label for="example-disable">Disabled</label>
-                    <input type="text" class="form-control" id="example-disable" disabled="" value="Disabled value">
-                </div>
-                <div class="form-group mb-3">
-                    <label for="example-static">Static control</label>
-                    <input type="text" readonly="" class="form-control-plaintext" id="example-static" value="j@example.com">
+        <form class="needs-validation" asp-action="CreateOrder" asp-controller="Sales" method="post" id="formCreateOrderHeader">
+            <div class="row">
+                @*<input type="checkbox" asp-for="saveDraft" id="inputsaveDraft" style="display:none" />*@
+                <div class="col-md-6">
+                    <div class="form-group mb-4">
+                        <label for="simpleinput">@localizer["Chases"]</label>
+                        <input onblur="checkChases(this.value)" asp-for="Chases" class="form-control" required />
+                        <span asp-validation-for="Chases" class="text-danger"></span>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="example-email">@localizer["CarName"]</label>
+                        <input asp-for="VehicleName" class="form-control" required />
+                        <span asp-validation-for="VehicleName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="example-password">@localizer["Phone"]</label>
+                        <input asp-for="CustomerPhone" class="form-control" required />
+                        <span asp-validation-for="CustomerPhone" class="text-danger"></span>
+                    </div>
+                    <div class="form-group mb-3">
+                        
+                        <div class="row">
+
+                            <div class="col-md-7">
+                                <label for="example-palaceholder">@localizer["Maintenance"]   </label>
+                                <input asp-for="WithMaintenance" class="form-check-label" />
+                                <span asp-validation-for="WithMaintenance" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-5">
+                                <input type="button" class="btn btn-primary" id="btnOpenDetails" onclick="OpenDetails()" value="@localizer["OpenDetails"]"/>
+                                <input type="button" class="btn btn-warning" id="btnRemoveDetails" onclick="RemoveDetails()" value="@localizer["RemoveDetails"]"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group mb-3">
+                        <div class="row">
+                            <div class="col-md-5">
+                                <a class="btn btn-danger" style=" width: 100px;" href="~/"> @localizer["Cancel"]</a>
+                                <input class="btn btn-success" style=" width: 100px;" type="submit" value="@localizer["Save"]" />
+                                @*@if (Model.DraftId.HasValue && Model.DraftId.Value > 0)
+                                    {
+                                        <input asp-for="DraftId" style="display:none" />
+                                    }
+                                    else
+                                    {
+                                        <input class="btn btn-primary" type="button" onclick="SaveOrderAsDraft()" value="@localizer["SaveAsDraft"]" />
+                                    }*@
+                            </div>
+                            <div class="col-md-5"></div>
+
+                            <div class="col-md-2">
+                               
+
+                            </div>
+                        </div>
+                       
+                       
+                    </div>
+                </div> <!-- /.col -->
+                <div class="col-md-6" id="carDetails" style="display:none">
+
+                    <div class="form-group mb-3">
+                        <label for="example-helping">@localizer["Brand"]</label>
+                        <input asp-for="Brand" class="form-control" />
+                        <span asp-validation-for="Brand" class="text-danger"></span>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="example-readonly">@localizer["Model"]</label>
+                        <input asp-for="Model" class="form-control" />
+                        <span asp-validation-for="Model" class="text-danger"></span>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="example-disable">@localizer["Year"]</label>
+                        <select asp-for="Year" class="form-control" >
+                            <option value="" selected>@localizer["Choose"]</option>
+                            @for (int i = 1900; i < 2100; i++)
+                            {
+                                <option value="@i">@i</option>
+                            }
+
+                        </select>
+                        <span asp-validation-for="Year" class="text-danger"></span>
+                    </div>
+
+                 
                 </div>
             </div>
-        </div>
+        </form>
     </div>
-</div> <!-- / .card -->
+</div>
+
+@section Scripts {
+<script>
+    ChangeColorSidebarItem("anavbarOrders", "aAddOrderHeader");
+    document.getElementById("btnRemoveDetails").style.display = "none";
+    let _OpenDetails = false;
+    function OpenDetails() {
+        _OpenDetails = true;
+        document.getElementById("btnOpenDetails").style.display = "none";
+        document.getElementById("btnRemoveDetails").style.display = "block";
+        checkChases();
+    }
+    function RemoveDetails() {
+        document.getElementById("btnOpenDetails").style.display = "block";
+        document.getElementById("btnRemoveDetails").style.display = "none";
+        _OpenDetails = false;
+        document.getElementById("carDetails").style.display = "none";
+        document.getElementById("Year").value = null;
+        document.getElementById("Model").value = null;
+        document.getElementById("Brand").value = null;
+    }
+
+    function checkChases(value) {
+        console.log(_OpenDetails);
+        if (_OpenDetails) {
+            document.getElementById("carDetails").style.display = "block";
+        } else {
+            if (value.trim().length < 7) {
+                document.getElementById("carDetails").style.display = "block";
+                document.getElementById("btnRemoveDetails").style.display = "block";
+                document.getElementById("btnOpenDetails").style.display = "none";
+            } else {
+                //document.getElementById("carDetails").style.display = "none";
+                //document.getElementById("Year").value = null;
+                //document.getElementById("Model").value = null;
+                //document.getElementById("Brand").value = null;
+            }
+        }
+       
+    }
+    //function SaveOrderAsDraft() {
+    //    //document.getElementById("inputsaveDraft").value = true;
+    //    document.getElementById("inputsaveDraft").checked = true;
+    //    document.getElementById("formCreateOrderHeader").submit();
+    //}
+   
+</script>
+   
+}

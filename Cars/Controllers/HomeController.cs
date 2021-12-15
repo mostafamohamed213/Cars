@@ -33,7 +33,7 @@ namespace Cars.Controllers
         [HttpPost]
         public IActionResult SetLanguage(string culture, string returnUrl)
         {
-            if (culture.Contains("ar-EG"))
+            if (culture.Contains("ar"))
             {
                 StaticValues.RTL = true;
             }
@@ -47,7 +47,7 @@ namespace Cars.Controllers
                 new CookieOptions { Expires = DateTimeOffset.UtcNow.AddYears(1) }
             );
 
-            return LocalRedirect(returnUrl);
+            return LocalRedirect("/");
         }
 
 

@@ -18,6 +18,8 @@ namespace Cars.ViewModels
         public bool WithMaintenance { get; set; }
         public string Brand { get; set; }
         public string Model { get; set; }
-        public DateTime Year { get; set; }
+        public string Year { get; set; }
+        //public long? DraftId  { get; set; }
+        //public bool saveDraft { get; set; }
     }
 }

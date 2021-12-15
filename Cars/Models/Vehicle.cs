@@ -18,7 +18,7 @@ namespace Cars.Models
         public string Name { get; set; }
         public string Brand { get; set; }
         public string Model { get; set; }
-        public DateTime? Year { get; set; }
+        public string Year { get; set; }
         public virtual List<Order> Orders { get; set; }
         [Required]
         public string SystemUserCreate { get; set; }        

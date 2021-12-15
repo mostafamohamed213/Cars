@@ -25,7 +25,15 @@ namespace Cars.Models
         public int OrderDetailsTypeID { get; set; }
         [ForeignKey("OrderDetailsTypeID")]
         public  OrderDetailsType OrderDetailsType { get; set; }
+    
+        public int? LayerID { get; set; }
+        [ForeignKey("LayerID")]
+        public Layer Layer { get; set; }
 
+        // flase = save as draft
+        // true =save 
+        // null = save order and order details without click button save or save as draft
+        public bool? Enabled { get; set; }
         [Required]
         public string SystemUserCreate { get; set; }
         public DateTime DTsCreate { get; set; }

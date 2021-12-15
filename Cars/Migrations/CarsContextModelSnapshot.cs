@@ -92,6 +92,369 @@ namespace Cars.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
+            modelBuilder.Entity("Cars.Models.Customer", b =>
+                {
+                    b.Property<long>("CustomerID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<DateTime>("DTsCreate")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<DateTime?>("DTsUpdate")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("text");
+
+                    b.Property<string>("SystemUserCreate")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("SystemUserUpdate")
+                        .HasColumnType("text");
+
+                    b.HasKey("CustomerID");
+
+                    b.ToTable("Customers");
+                });
+
+            modelBuilder.Entity("Cars.Models.CustomerContact", b =>
+                {
+                    b.Property<long>("CustomerContactID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<long>("CustomerID")
+                        .HasColumnType("bigint");
+
+                    b.Property<DateTime>("DTsCreate")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<DateTime?>("DTsUpdate")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<bool>("HasTelegram")
+                        .HasColumnType("boolean");
+
+                    b.Property<bool>("HasWhatsapp")
+                        .HasColumnType("boolean");
+
+                    b.Property<string>("Phone")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("SystemUserCreate")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("SystemUserUpdate")
+                        .HasColumnType("text");
+
+                    b.HasKey("CustomerContactID");
+
+                    b.HasIndex("CustomerID");
+
+                    b.ToTable("CustomerContacts");
+                });
+
+            modelBuilder.Entity("Cars.Models.DraftOrder", b =>
+                {
+                    b.Property<long>("DraftOrderID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("Brand")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Chases")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("DTsCreate")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<DateTime?>("DTsUpdate")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<long>("EmployeeBranchID")
+                        .HasColumnType("bigint");
+
+                    b.Property<bool>("Enable")
+                        .HasColumnType("boolean");
+
+                    b.Property<string>("Model")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Phone")
+                        .HasColumnType("text");
+
+                    b.Property<string>("SystemUserCreate")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("SystemUserUpdate")
+                        .HasColumnType("text");
+
+                    b.Property<bool?>("WithMaintenance")
+                        .HasColumnType("boolean");
+
+                    b.Property<string>("Year")
+                        .HasColumnType("text");
+
+                    b.HasKey("DraftOrderID");
+
+                    b.ToTable("DraftOrders");
+                });
+
+            modelBuilder.Entity("Cars.Models.DraftOrderDetails", b =>
+                {
+                    b.Property<long>("DraftOrderDetailsId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<DateTime>("DTsCreate")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<DateTime?>("DTsUpdate")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<long>("DraftOrderID")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("Items")
+                        .HasColumnType("text");
+
+                    b.Property<int?>("OrderDetailsTypeID")
+                        .HasColumnType("integer");
+
+                    b.Property<int?>("Quantity")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("SystemUserCreate")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("SystemUserUpdate")
+                        .HasColumnType("text");
+
+                    b.HasKey("DraftOrderDetailsId");
+
+                    b.HasIndex("DraftOrderID");
+
+                    b.HasIndex("OrderDetailsTypeID");
+
+                    b.ToTable("DraftOrderDetails");
+                });
+
+            modelBuilder.Entity("Cars.Models.Layer", b =>
+                {
+                    b.Property<int>("LayerID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("Description")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("LayerID");
+
+                    b.ToTable("Layers");
+                });
+
+            modelBuilder.Entity("Cars.Models.Order", b =>
+                {
+                    b.Property<long>("OrderID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<long>("CustomerID")
+                        .HasColumnType("bigint");
+
+                    b.Property<DateTime>("DTsCreate")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<DateTime?>("DTsUpdate")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<long>("EmployeeBranchID")
+                        .HasColumnType("bigint");
+
+                    b.Property<bool?>("Enabled")
+                        .HasColumnType("boolean");
+
+                    b.Property<string>("Prefix")
+                        .HasColumnType("text");
+
+                    b.Property<string>("SystemUserCreate")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("SystemUserUpdate")
+                        .HasColumnType("text");
+
+                    b.Property<long>("VehicleID")
+                        .HasColumnType("bigint");
+
+                    b.Property<bool?>("WithMaintenance")
+                        .HasColumnType("boolean");
+
+                    b.HasKey("OrderID");
+
+                    b.HasIndex("CustomerID");
+
+                    b.HasIndex("VehicleID");
+
+                    b.ToTable("Orders");
+                });
+
+            modelBuilder.Entity("Cars.Models.OrderDetails", b =>
+                {
+                    b.Property<long>("OrderDetailsID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<int>("BranchID")
+                        .HasColumnType("integer");
+
+                    b.Property<DateTime>("DTsCreate")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<DateTime?>("DTsUpdate")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<bool?>("Enabled")
+                        .HasColumnType("boolean");
+
+                    b.Property<bool?>("IsApproved")
+                        .HasColumnType("boolean");
+
+                    b.Property<string>("Items")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<int?>("LayerID")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("OrderDetailsTypeID")
+                        .HasColumnType("integer");
+
+                    b.Property<long>("OrderID")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("Prefix")
+                        .HasColumnType("text");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("SystemUserCreate")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("SystemUserUpdate")
+                        .HasColumnType("text");
+
+                    b.HasKey("OrderDetailsID");
+
+                    b.HasIndex("LayerID");
+
+                    b.HasIndex("OrderDetailsTypeID");
+
+                    b.HasIndex("OrderID");
+
+                    b.ToTable("OrderDetails");
+                });
+
+            modelBuilder.Entity("Cars.Models.OrderDetailsType", b =>
+                {
+                    b.Property<int>("OrderDetailsTypeID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<DateTime>("DTsCreate")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<DateTime?>("DTsUpdate")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<string>("Details")
+                        .HasColumnType("text");
+
+                    b.Property<string>("NameAr")
+                        .HasColumnType("text");
+
+                    b.Property<string>("NameEn")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("SystemUserCreate")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("SystemUserUpdate")
+                        .HasColumnType("text");
+
+                    b.HasKey("OrderDetailsTypeID");
+
+                    b.ToTable("OrderDetailsType");
+                });
+
+            modelBuilder.Entity("Cars.Models.Vehicle", b =>
+                {
+                    b.Property<long>("VehicleID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("Brand")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Chases")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("DTsCreate")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<DateTime?>("DTsUpdate")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<string>("Model")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("SystemUserCreate")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("SystemUserUpdate")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Year")
+                        .HasColumnType("text");
+
+                    b.HasKey("VehicleID");
+
+                    b.ToTable("Vehicle");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
                     b.Property<string>("Id")
@@ -222,6 +585,78 @@ namespace Cars.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("Cars.Models.CustomerContact", b =>
+                {
+                    b.HasOne("Cars.Models.Customer", "Customer")
+                        .WithMany("CustomerContacts")
+                        .HasForeignKey("CustomerID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Customer");
+                });
+
+            modelBuilder.Entity("Cars.Models.DraftOrderDetails", b =>
+                {
+                    b.HasOne("Cars.Models.DraftOrder", "DraftOrder")
+                        .WithMany()
+                        .HasForeignKey("DraftOrderID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Cars.Models.OrderDetailsType", "OrderDetailsType")
+                        .WithMany()
+                        .HasForeignKey("OrderDetailsTypeID");
+
+                    b.Navigation("DraftOrder");
+
+                    b.Navigation("OrderDetailsType");
+                });
+
+            modelBuilder.Entity("Cars.Models.Order", b =>
+                {
+                    b.HasOne("Cars.Models.Customer", "Customer")
+                        .WithMany("Orders")
+                        .HasForeignKey("CustomerID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Cars.Models.Vehicle", "Vehicle")
+                        .WithMany("Orders")
+                        .HasForeignKey("VehicleID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Customer");
+
+                    b.Navigation("Vehicle");
+                });
+
+            modelBuilder.Entity("Cars.Models.OrderDetails", b =>
+                {
+                    b.HasOne("Cars.Models.Layer", "Layer")
+                        .WithMany()
+                        .HasForeignKey("LayerID");
+
+                    b.HasOne("Cars.Models.OrderDetailsType", "OrderDetailsType")
+                        .WithMany("OrderDetails")
+                        .HasForeignKey("OrderDetailsTypeID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Cars.Models.Order", "Order")
+                        .WithMany("OrderDetails")
+                        .HasForeignKey("OrderID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Layer");
+
+                    b.Navigation("Order");
+
+                    b.Navigation("OrderDetailsType");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -271,6 +706,28 @@ namespace Cars.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("Cars.Models.Customer", b =>
+                {
+                    b.Navigation("CustomerContacts");
+
+                    b.Navigation("Orders");
+                });
+
+            modelBuilder.Entity("Cars.Models.Order", b =>
+                {
+                    b.Navigation("OrderDetails");
+                });
+
+            modelBuilder.Entity("Cars.Models.OrderDetailsType", b =>
+                {
+                    b.Navigation("OrderDetails");
+                });
+
+            modelBuilder.Entity("Cars.Models.Vehicle", b =>
+                {
+                    b.Navigation("Orders");
                 });
 #pragma warning restore 612, 618
         }

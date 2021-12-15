@@ -24,12 +24,16 @@ namespace Cars.Models
         public  Vehicle Vehicle { get; set; }
         public virtual List<OrderDetails> OrderDetails { get; set; }
         public long EmployeeBranchID { get; set; }
-
+        // flase = save as draft
+        // true =save 
+        // null = save order and order details without click button save or save as draft
+        public bool? Enabled  { get; set; }
         [Required]
         public string SystemUserCreate { get; set; }
         public DateTime DTsCreate { get; set; }
-
+       
         public string SystemUserUpdate { get; set; }
         public DateTime? DTsUpdate { get; set; }
+
     }
 }
