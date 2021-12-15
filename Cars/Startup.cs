@@ -1,8 +1,10 @@
 using Cars.Models;
+using Microsoft.AspNetCore.Authorization;
 using Cars.Service;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.EntityFrameworkCore;
@@ -49,7 +51,25 @@ namespace Cars
                 options.SupportedCultures = supportedCultures;
                 options.SupportedUICultures = supportedCultures;
             });
+            services.AddSingleton<IAuthorizationPolicyProvider, PermissionPolicyProvider>();
+            services.AddScoped<IAuthorizationHandler, PermissionAuthorizationHandler>();
+
+            services.AddSession();
+
+            services.Configure<SecurityStampValidatorOptions>(options =>
+            {
+                options.ValidationInterval = TimeSpan.Zero;
+            });
+
+
             services.AddControllersWithViews();
+            services.AddMvc(config => {
+                var policy = new AuthorizationPolicyBuilder()
+                                .RequireAuthenticatedUser()
+                                .Build();
+                config.Filters.Add(new AuthorizeFilter(policy));
+            });
+
             services.AddDbContext<CarsContext>(options =>
               options.UseNpgsql(Configuration.GetConnectionString("Cars")));
             services.AddIdentity<ApplicationUser, IdentityRole>(options =>
@@ -60,6 +80,16 @@ namespace Cars
               .AddEntityFrameworkStores<CarsContext>()
                .AddDefaultTokenProviders();
             services.AddTransient<OrderServices, OrderServices>();
+  .AddEntityFrameworkStores<CarsContext>()
+   .AddDefaultTokenProviders();
+
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.LoginPath = $"/Accounts/login";
+                options.LogoutPath = $"/Accounts/logout";
+                options.AccessDeniedPath = $"/Accounts/accessDenied";
+                //  options.ExpireTimeSpan = TimeSpan.FromMinutes(3);
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -74,6 +104,7 @@ namespace Cars
                 app.UseExceptionHandler("/Home/Error");
             }
             app.UseStaticFiles();
+            app.UseAuthentication();
 
             app.UseRouting();
 
@@ -81,6 +112,7 @@ namespace Cars
             app.UseRequestLocalization(locOptions.Value);
 
             app.UseAuthorization();
+            app.UseSession();
 
             app.UseEndpoints(endpoints =>
             {

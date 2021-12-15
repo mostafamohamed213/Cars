@@ -59,10 +59,13 @@
               "target": "Package",
               "version": "[5.0.12, )"
             },
+<<<<<<< HEAD
             "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
               "target": "Package",
               "version": "[5.0.2, )"
             },
+=======
+>>>>>>> 96d0ecf3b60db9f2bacbcfb8a72dab0231d4bce8
             "Newtonsoft.Json": {
               "target": "Package",
               "version": "[13.0.1, )"

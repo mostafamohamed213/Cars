@@ -566,6 +566,7 @@
           "lib/netcoreapp3.0/Microsoft.Extensions.Primitives.dll": {}
         }
       },
+<<<<<<< HEAD
       "Microsoft.NETCore.Platforms/2.1.2": {
         "type": "package",
         "compile": {
@@ -700,6 +701,8 @@
           "lib/net5.0/Microsoft.VisualStudio.Web.CodeGenerators.Mvc.dll": {}
         }
       },
+=======
+>>>>>>> 96d0ecf3b60db9f2bacbcfb8a72dab0231d4bce8
       "Newtonsoft.Json/13.0.1": {
         "type": "package",
         "compile": {
@@ -2060,6 +2063,7 @@
         "version.txt"
       ]
     },
+<<<<<<< HEAD
     "Microsoft.NETCore.Platforms/2.1.2": {
       "sha512": "mOJy3M0UN+LUG21dLGMxaWZEP6xYpQEpLuvuEQBaownaX4YuhH6NmNUlN9si+vNkAS6dwJ//N1O4DmLf2CikVg==",
       "type": "package",
@@ -2500,6 +2504,8 @@
         "microsoft.visualstudio.web.codegenerators.mvc.nuspec"
       ]
     },
+=======
+>>>>>>> 96d0ecf3b60db9f2bacbcfb8a72dab0231d4bce8
     "Newtonsoft.Json/13.0.1": {
       "sha512": "ppPFpBcvxdsfUonNcvITKqLl3bqxWbDCZIzDWHzjpdAHRFfZe0Dw9HmA0+za13IdyrgJwpkDTDA9fHaxOrt20A==",
       "type": "package",
@@ -2529,6 +2535,7 @@
     },
     "Npgsql/5.0.10": {
       "sha512": "3TB9le3lfu5Hc+LSHqMCVLcA+qUPg1enyM4+u0pMUBmNNGwc0sVPrnfnys2TVZIdkF8Aww/AZlnJHDsnEGqD0g==",
+<<<<<<< HEAD
       "type": "package",
       "path": "npgsql/5.0.10",
       "files": [
@@ -3963,6 +3970,8 @@
     },
     "System.Runtime.Extensions/4.3.0": {
       "sha512": "guW0uK0fn5fcJJ1tJVXYd7/1h5F+pea1r7FLSOz/f8vPEqbR2ZAknuRDvTQ8PzAilDveOxNjSfr0CHfIQfFk8g==",
+=======
+>>>>>>> 96d0ecf3b60db9f2bacbcfb8a72dab0231d4bce8
       "type": "package",
       "path": "system.runtime.extensions/4.3.0",
       "files": [
@@ -4346,7 +4355,10 @@
       "Microsoft.AspNetCore.Identity.EntityFrameworkCore >= 5.0.12",
       "Microsoft.EntityFrameworkCore.Design >= 5.0.12",
       "Microsoft.EntityFrameworkCore.Tools >= 5.0.12",
+<<<<<<< HEAD
       "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 5.0.2",
+=======
+>>>>>>> 96d0ecf3b60db9f2bacbcfb8a72dab0231d4bce8
       "Newtonsoft.Json >= 13.0.1",
       "Npgsql.EntityFrameworkCore.PostgreSQL >= 5.0.10"
     ]
@@ -4410,10 +4422,13 @@
             "target": "Package",
             "version": "[5.0.12, )"
           },
+<<<<<<< HEAD
           "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
             "target": "Package",
             "version": "[5.0.2, )"
           },
+=======
+>>>>>>> 96d0ecf3b60db9f2bacbcfb8a72dab0231d4bce8
           "Newtonsoft.Json": {
             "target": "Package",
             "version": "[13.0.1, )"

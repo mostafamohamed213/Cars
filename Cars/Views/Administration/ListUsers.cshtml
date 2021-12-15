@@ -1,0 +1,190 @@
+﻿@*@model IEnumerable<ApplicationUser>*@
+
+@model PaginatedList<Task<Users_in_Role_ViewModel>>
+@inject IAuthorizationService AuthorizationService
+@{
+    ViewBag.Title = "All Users";
+}
+<div class="row mr-0">
+    <div class="col-sm-6">
+        <h3 class="ml-2">All Users</h3>
+    </div>
+    @if (AuthorizationService.AuthorizeAsync(User, Permissions.Roles.View).Result.Succeeded)
+    {
+        <div class="col-sm-6 text-right mr-0">
+            <a asp-action="ListRoles" asp-controller="Administration"
+               class="btn btn-dark mb-3 ml-auto" style="width:auto">
+                Manage Roles & Permissions
+            </a>
+        </div>
+    }
+</div>
+
+@if (Model.Any())
+{
+    @if (AuthorizationService.AuthorizeAsync(User, Permissions.Users.Create).Result.Succeeded)
+    {
+        <a asp-action="Register" asp-controller="Accounts"
+           class="btn btn-primary mb-3 ml-3" style="width:auto">
+            Add New User
+        </a>
+    }
+    <form asp-action="ListUsers" method="get">
+        <div class="form-actions row mr-0 ml-2">
+
+            <div class="col-sm-12">
+                <div class="input-group">
+                    <div class="col-sm-12 row">
+                        <div class="input-group col-md-5">
+                            <input type="search" class="form-control rounded" placeholder="Search By UserName" aria-label="Search"
+                                   aria-describedby="search-addon" name="SearchString" value="@ViewData["CurrentFilter"]" />
+                        </div>
+                        <div class="input-group col-md-5">
+                            <input type="search" class="form-control ml-2 rounded" placeholder="Search By FirstName" aria-label="Search"
+                                   aria-describedby="search-addon" name="SearchString2" value="@ViewData["CurrentFilter2"]" />
+
+
+                        </div>
+                        <button type="submit" class="btn btn-outline-primary">Search</button>
+                        </div>
+                    </div>
+                </div>
+            <div class="col-sm-3">
+                <a asp-action="ListUsers">Back To All List</a>
+            </div>
+        </div>
+
+    </form>
+    <hr />
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped mb-0">
+            <thead>
+                <tr>
+                    <th>
+                        UserName
+                    </th>
+                    <th>
+                        FirstName
+                    </th>
+                    <th>
+                        Email
+                    </th>
+                    <th>
+                        Role
+                    </th>
+                    @if (AuthorizationService.AuthorizeAsync(User, Permissions.Users.Edit).Result.Succeeded)
+                    {
+                        <th>
+                            Edit
+                        </th>
+                    }
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var user in Model)
+                {
+                <tr>
+                    <td>
+                        @user.Result.Username
+                    </td>
+                    <td>
+                        @user.Result.FirstName
+                    </td>
+                    <td>
+                        @user.Result.Email
+                    </td>
+                    <td>
+                        @user.Result.Role
+
+                    </td>
+                    @if (AuthorizationService.AuthorizeAsync(User, Permissions.Users.Edit).Result.Succeeded)
+                    {
+                        <td>
+                            <a asp-action="EditUser" asp-controller="Administration"
+                               asp-route-id="@user.Result.UserId" class="btn btn-primary">Edit</a>
+                        </td>
+                    }
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+
+
+    <div class="col-sm-8" style="overflow-x:auto">
+        <a asp-action="ListUsers"
+           asp-route-pageNumber="@(Model.PageIndex - 1)"
+           asp-route-currentFilter="@ViewData["CurrentFilter"]"
+              asp-route-currentFilter2="@ViewData["CurrentFilter2"]"
+           class="btn btn-primary @prevDisabled">
+            Previous
+        </a>
+        @{
+            int pagenumbers = (ViewBag.currentpage + 4 <= ViewBag.pages) ? ViewBag.currentpage + 4 : ViewBag.currentpage + 3;
+            if (pagenumbers > ViewBag.pages)
+            {
+                pagenumbers = ViewBag.currentpage + 2;
+            }
+
+            if (pagenumbers > ViewBag.pages)
+            {
+                pagenumbers = ViewBag.currentpage + 1;
+            }
+            if (pagenumbers > ViewBag.pages)
+            {
+                pagenumbers = ViewBag.currentpage;
+            }
+
+            int start = (ViewBag.currentpage - 2 > 0) ? ViewBag.currentpage - 2 : ViewBag.currentpage;
+        }
+        @for (int i = start; i <= pagenumbers; i++)
+        {
+            if (i == ViewBag.currentpage)
+            {
+                <a asp-action="ListUsers"
+                   asp-route-pageNumber="@i"
+                   asp-route-currentFilter="@ViewData["CurrentFilter"]"
+                      asp-route-currentFilter2="@ViewData["CurrentFilter2"]"
+                   class="btn btn-success">
+                    @i
+                </a>
+            }
+            else
+            {
+                <a asp-action="ListUsers"
+                   asp-route-pageNumber="@i"
+                   asp-route-currentFilter="@ViewData["CurrentFilter"]"
+                      asp-route-currentFilter2="@ViewData["CurrentFilter2"]"
+                   class="btn btn-primary">
+                    @i
+                </a>
+            }
+        }
+        <a asp-action="ListUsers"
+           asp-route-pageNumber="@(Model.PageIndex + 1)"
+           asp-route-currentFilter="@ViewData["CurrentFilter"]"
+              asp-route-currentFilter2="@ViewData["CurrentFilter2"]"
+           class="btn btn-primary @nextDisabled">
+          Next
+        </a>
+    </div>
+}
+else
+{
+    <div class="card">
+        <div class="card-header">
+            No users created yet
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">
+                Use the button below to create a user
+            </h5>
+            <a class="btn btn-primary" style="width:auto"
+               asp-controller="Accounts" asp-action="Register">
+                Add new user
+            </a>
+        </div>
+    </div>
+}

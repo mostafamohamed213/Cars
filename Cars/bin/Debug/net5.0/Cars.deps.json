@@ -36,7 +36,10 @@
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "5.0.12",
           "Microsoft.EntityFrameworkCore.Design": "5.0.12",
           "Microsoft.EntityFrameworkCore.Tools": "5.0.12",
+<<<<<<< HEAD
           "Microsoft.VisualStudio.Web.CodeGeneration.Design": "5.0.2",
+=======
+>>>>>>> 96d0ecf3b60db9f2bacbcfb8a72dab0231d4bce8
           "Newtonsoft.Json": "13.0.1",
           "Npgsql.EntityFrameworkCore.PostgreSQL": "5.0.10",
           "Microsoft.AspNetCore.Antiforgery": "5.0.0.0",
@@ -824,6 +827,7 @@
         }
       },
       "Microsoft.Extensions.Primitives/5.0.0": {},
+<<<<<<< HEAD
       "Microsoft.NETCore.Platforms/2.1.2": {},
       "Microsoft.NETCore.Targets/1.1.0": {},
       "Microsoft.VisualStudio.Web.CodeGeneration/5.0.2": {
@@ -960,6 +964,8 @@
           "lib/net5.0/Microsoft.VisualStudio.Web.CodeGenerators.Mvc.dll": {}
         }
       },
+=======
+>>>>>>> 96d0ecf3b60db9f2bacbcfb8a72dab0231d4bce8
       "Newtonsoft.Json/13.0.1": {
         "runtime": {
           "lib/netstandard2.0/Newtonsoft.Json.dll": {
@@ -3234,6 +3240,7 @@
       "path": "microsoft.extensions.primitives/5.0.0",
       "hashPath": "microsoft.extensions.primitives.5.0.0.nupkg.sha512"
     },
+<<<<<<< HEAD
     "Microsoft.NETCore.Platforms/2.1.2": {
       "type": "package",
       "serviceable": true,
@@ -3304,6 +3311,8 @@
       "path": "microsoft.visualstudio.web.codegenerators.mvc/5.0.2",
       "hashPath": "microsoft.visualstudio.web.codegenerators.mvc.5.0.2.nupkg.sha512"
     },
+=======
+>>>>>>> 96d0ecf3b60db9f2bacbcfb8a72dab0231d4bce8
     "Newtonsoft.Json/13.0.1": {
       "type": "package",
       "serviceable": true,
